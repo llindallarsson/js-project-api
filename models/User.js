@@ -1,23 +1,23 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+import crypto from "crypto";
 
-const UserSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     unique: true,
     required: true,
     minlength: 3,
+    maxlength: 30,
   },
   password: {
     type: String,
     required: true,
     minlength: 5,
   },
+  accessToken: {
+    type: String,
+    default: () => crypto.randomBytes(128).toString("hex"),
+  },
 });
 
-// Kryptera lösenord innan det sparas
-UserSchema.pre("save", async function () {
-  this.password = await bcrypt.hash(this.password, 10);
-});
-
-export const User = mongoose.model("User", UserSchema);
+export const User = mongoose.model("User", userSchema);
