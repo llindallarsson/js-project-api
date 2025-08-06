@@ -1,4 +1,6 @@
 import express from "express";
+
+import authenticateUser from "../middlewares/authenticateUser.js";
 import HappyThought from "../models/Thought.js";
 
 const router = express.Router();
@@ -30,11 +32,15 @@ router.get("/:id", async (req, res) => {
 });
 
 // add new post
-router.post("/", async (req, res) => {
+router.post("/", authenticateUser, async (req, res) => {
   const { message } = req.body;
 
   try {
-    const newThought = new HappyThought({ message });
+    const newThought = new HappyThought({
+      message,
+      createdBy: req.user._id, // lägg till användaren som skapar
+    });
+
     const savedThought = await newThought.save();
     res.status(201).json(savedThought);
   } catch (error) {
@@ -76,7 +82,7 @@ router.delete("/:id", async (req, res) => {
 });
 
 // like post
-router.post("/thoughts/:id/like", async (req, res) => {
+router.post("/:id/like", async (req, res) => {
   try {
     const thought = await HappyThought.findByIdAndUpdate(
       req.params.id,

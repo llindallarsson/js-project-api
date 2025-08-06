@@ -15,7 +15,14 @@ const thoughtSchema = new mongoose.Schema(
     },
   },
   {
-    timestamps: true, // Skapar createdAt och updatedAt automatiskt
+    timestamps: true,
+  },
+  {
+    createdBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
   }
 );
 
