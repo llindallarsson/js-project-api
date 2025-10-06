@@ -6,8 +6,8 @@ const authenticateUser = async (req, res, next) => {
   try {
     const user = await User.findOne({ accessToken });
     if (user) {
-      req.user = user; // Lägg till användaren på request-objektet
-      next(); // Gå vidare till nästa steg (ex. route handler)
+      req.user = user;
+      next();
     } else {
       res.status(401).json({ message: "Access token is invalid" });
     }

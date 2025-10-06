@@ -1,6 +1,6 @@
-import express from "express";
 import bcrypt from "bcrypt";
 import crypto from "crypto";
+import express from "express";
 
 import { User } from "../models/User.js";
 
@@ -27,8 +27,7 @@ router.post("/", async (req, res) => {
       accessToken: user.accessToken,
     });
   } catch (err) {
-    console.error("Signup error:", err); // ← Lägg till denna rad
-
+    console.error("Signup error:", err);
     if (err.code === 11000) {
       res.status(400).json({ message: "Username already exists" });
     } else {

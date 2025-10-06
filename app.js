@@ -1,10 +1,10 @@
-import express from "express";
 import cors from "cors";
-import mongoose from "mongoose";
 import dotenv from "dotenv";
+import express from "express";
+import mongoose from "mongoose";
 
-import thoughtRoutes from "./routes/thoughts.js";
 import userRoutes from "./routes/auth.js";
+import thoughtRoutes from "./routes/thoughts.js";
 
 dotenv.config();
 
@@ -16,10 +16,7 @@ app.use(express.json());
 
 // === Connect to MongoDB ===
 const mongoUrl = process.env.MONGO_URL || "mongodb://localhost/happyThoughts";
-mongoose.connect(mongoUrl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(mongoUrl);
 mongoose.Promise = Promise;
 
 // === Routes ===

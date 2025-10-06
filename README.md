@@ -1,11 +1,38 @@
-# Project API
+# Happy Thoughts API
 
-This project includes the packages and babel setup for an express server, and is just meant to make things a little simpler to get up and running with.
+A RESTful API for sharing and managing happy thoughts with user authentication.
 
-## Getting started
+## API Endpoints
 
-Install dependencies with `npm install`, then start the server by running `npm run dev`
+### Root
 
-## View it live
+`GET /`
+Welcome message for the API.
 
-Every project should be deployed somewhere. Be sure to include the link to the deployed project so that the viewer can click around and see what it's all about.
+### Thoughts
+
+`GET /thoughts`
+Retrieves all thoughts.
+
+`POST /thoughts`
+Creates a new thought.
+
+`GET /thoughts/:id`
+Retrieves a specific thought by ID.
+
+`PUT /thoughts/:id`
+Updates a specific thought.
+
+`DELETE /thoughts/:id`
+Deletes a specific thought.
+
+`POST /thoughts/:id/like`
+Adds a like (heart) to a specific thought.
+
+### Users
+
+`POST /users`
+Registers a new user.
+
+`POST /users/sessions`
+Logs in an existing user.

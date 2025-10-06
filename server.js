@@ -1,7 +1,14 @@
+import listEndpoints from "express-list-endpoints";
+
 import app from "./app.js";
 
-const port = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 
-app.listen(port, "0.0.0.0", () => {
-  console.log(`Server running on http://0.0.0.0:${port}`);
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+  console.log(`📝 Thoughts API: http://localhost:${PORT}/thoughts`);
+  console.log(`👤 Users API: http://localhost:${PORT}/users`);
+
+  console.log("\n📋 All API Endpoints:");
+  console.log(listEndpoints(app));
 });
