@@ -1,7 +1,9 @@
 import { User } from "../models/User.js";
 
 const authenticateUser = async (req, res, next) => {
-  const accessToken = req.header("Authorization");
+  const authHeader = req.header("Authorization");
+
+  const accessToken = authHeader?.replace("Bearer ", "");
 
   try {
     const user = await User.findOne({ accessToken });
